@@ -4,8 +4,8 @@
 
 ## Table of Contents
 
-1. [Why for..in method is not best solution to iterate array?](#Why_for..in_method_is_not_best_solution_to_iterate__array?)
-2. [Why for..in method is slower than other methods?](#Why_for..in_method_is_slower_than_other_methods?)
+1. [Why for..in method is not best solution to iterate array?](#why_for..in_method_is_not_best_solution_to_iterate__array?)
+2. [Why for..in method is slower than other methods?](#why_for..in_method_is_slower_than_other_methods?)
 
 ### Why for..in method is not best solution to iterate array?
 
