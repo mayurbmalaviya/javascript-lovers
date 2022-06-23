@@ -4,11 +4,11 @@
 
 ## Table of Contents
 
-1. [Why for..in method is not best solution to iterate array?](#why_for_in_method_is_not_best_solution_to_iterate__array?)
-2. [Why for..in method is slower than other methods?](#why_for_in_method_is_slower_than_other_methods?)
-3. [Associative array in JavaScript](#associative_array_in_javascript)
+1. [Why for..in method is not best solution to iterate array?](#forin_drawback)
+2. [Why for..in method is slower than other methods?](#forin_slower)
+3. [Associative array in JavaScript](#associative_array)
 
-### Why for..in method is not best solution to iterate array?
+### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
 ---
 
@@ -73,13 +73,13 @@ While using `for...in` loop we have to use `hasOwnProperty()` to check current o
 
 All `objects` in JS are `associative`. A `JS Array` is an `object`, so yes, it’s `associative too`. If you want to iterate over an object's keys, use `for (var key in object)`. Hence, `For...in` loop is find the `elements` from the array as well as `property` from prototype because parent class is an object.
 
-## Why for_in loop is slower than other methods?
+## Why for_in loop is slower than other methods?<a name="forin_slower"></a>
 
 ---
 
 For..in method is slower because it `iterates an associative array or object properties`. In other words, in js everything is object. Even `array is also object` in js which inherits prototype of object. Hence, it will check all property of the object as well. Therefore, for..in loop is slower than other loops.
 
-## Associative array in JavaScript
+## Associative array in JavaScript<a name="associative_array"></a>
 
 ---
 
