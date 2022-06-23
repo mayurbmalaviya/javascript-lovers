@@ -4,8 +4,8 @@
 
 ## Table of Contents
 
-1. [Why for..in method is not best solution to iterate array?](#why_for..in_method_is_not_best_solution_to_iterate__array?)
-2. [Why for..in method is slower than other methods?](#why_for..in_method_is_slower_than_other_methods?)
+1. [Why for..in method is not best solution to iterate array?](#why_for_in_method_is_not_best_solution_to_iterate__array?)
+2. [Why for..in method is slower than other methods?](#why_for_in_method_is_slower_than_other_methods?)
 
 ### Why for..in method is not best solution to iterate array?
 
@@ -56,7 +56,7 @@ for (let index in arrayTestToResizeArray) {
 */
 ```
 
-### Explanation about for..in and for loop difference:
+### Explanation about for_in and for loop difference:
 
 ---
 
@@ -72,7 +72,7 @@ While using `for...in` loop we have to use `hasOwnProperty()` to check current o
 
 All `objects` in JS are `associative`. A `JS Array` is an `object`, so yes, it’s `associative too`. If you want to iterate over an object's keys, use `for (var key in object)`. Hence, `For...in` loop is find the `elements` from the array as well as `property` from prototype because parent class is an object.
 
-## Why for..in loop is slower than other methods?
+## Why for_in loop is slower than other methods?
 
 ---
 
