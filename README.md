@@ -7,6 +7,7 @@
 1. [Why for..in method is not best solution to iterate array?](#forin_drawback)
 2. [Why for..in method is slower than other methods?](#forin_slower)
 3. [Associative array in JavaScript](#associative_array)
+4. [Why [] == [] returns false?](#array_comparison)
 
 ### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
@@ -97,7 +98,7 @@ let arr = { key1: "value1", key2: "value2" };
 var arr = { "Company Name": ‘Javascript Lovers’, "ID": 123};
 ```
 
-## Why [] == [] returns false?
+## Why [] == [] returns false?<a name="array_comparison"></a>
 
 ---
 
