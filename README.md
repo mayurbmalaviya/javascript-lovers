@@ -96,3 +96,19 @@ let arr = { key1: "value1", key2: "value2" };
 ```javascript
 var arr = { "Company Name": ‘Javascript Lovers’, "ID": 123};
 ```
+
+## Why [] == [] returns false?
+
+---
+
+### Example:
+
+```javascript
+[] == []; // false
+```
+
+### Explanation:
+
+- It returns false because all `objects` in JS are `associative`. A `JS Array` is an `object`, so yes, it’s `associative too`.
+
+- [] creates a new array, so you are` comparing one array object with another array object`. It's `not the contents of the arrays` that is compared, the `object references are compared`. As a result, `they are not equal because it's not the same object instance.`
