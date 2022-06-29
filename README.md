@@ -8,6 +8,7 @@
 2. [Why for..in method is slower than other methods?](#forin_slower)
 3. [Associative array in JavaScript](#associative_array)
 4. [Why [] == [] returns false?](#array_comparison)
+5. [Explain about setTimeout with best example.](#setTimeout_explain)
 
 ### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
@@ -113,3 +114,27 @@ var arr = { "Company Name": ‘Javascript Lovers’, "ID": 123};
 - It returns false because all `objects` in JS are `associative`. A `JS Array` is an `object`, so yes, it’s `associative too`.
 
 - [] creates a new array, so you are` comparing one array object with another array object`. It's `not the contents of the arrays` that is compared, the `object references are compared`. As a result, `they are not equal because it's not the same object instance.`
+
+## Explain about setTimeout with best example.<a name="setTimeout_explain"></a>
+
+---
+
+### Example
+
+```javascript
+let x = true;
+setTimeout(() => {
+  x = false;
+}, 0);
+while (x) {
+  console.log(`Hello`);
+}
+console.log(`End of the task execution`);
+/* Will display output like:
+    Hello for infinit times
+*/
+```
+
+### Explanation
+
+This code will iterate the loop for `infinite times` because for setTimeout it will `wait 0 seconds` to perform task execution. Meanwhile, call stack will `execute further loop` and it will `occupy the callstack` for infinite loop. Hence, it will `not execute setTimeout callback eventhough waiting is over` because callstack is occupied by while loop.
