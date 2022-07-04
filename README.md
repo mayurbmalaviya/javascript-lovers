@@ -10,6 +10,7 @@
 4. [Why [] == [] returns false?](#array_comparison)
 5. [Explain about setTimeout with best example.](#setTimeout_explain)
 6. [Difference between `null` and `undefined`](#diff_null_and_undefined)
+7. [Difference between `REST` and `SPREAD` operators](#difference_rest_and_spread)
 
 ### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
@@ -174,3 +175,96 @@ typeof null; // object
 
 typeof undefined; // undefined
 ```
+
+## Difference between `REST` and `SPREAD` operators.<a name="difference_rest_and_spread"></a>
+
+---
+
+### Definition
+
+JavaScript uses `three dots (...) for both the rest and spread operators`. But these `two operators` are `not the same`.
+
+The `main difference` between rest and spread is that the `rest operator` puts `the rest of some specific user-supplied values into a JavaScript array`. But the `spread syntax expands iterables into individual elements`.
+
+### Example
+
+```javascript
+function myBio(firstName, lastName, ...otherInfo) {
+  return otherInfo;
+}
+
+// Invoke myBio function while passing five arguments to its parameters:
+myBio("Javascript", "lovers", "Mayurkumar", "Malaviya", "Author");
+```
+
+In the snippet above, we used the `...otherInfo rest parameter` to put `"Mayurkumar", "Malaviya", and "Author" into an array.`
+
+Now, consider this `example of a spread operator`:
+
+```javascript
+// Define a function with three parameters:
+function myBio(firstName, lastName, company) {
+  return `${firstName} ${lastName} runs by ${company}`;
+}
+
+// Use spread to expand an array’s items into individual arguments:
+myBio(...["Javascript", "Lovers", "Mayurkumar"]);
+```
+
+In the snippet above, we used the `spread operator (...)` to spread `["Javascript", "Lovers", "Mayurkumar"]’s` content across `myBio()’s parameters.`
+
+```javascript
+const [a, b, ...{ pop, push }] = [1, 2];
+console.log(a, b); // 1 2
+console.log(pop, push); // [Function pop] [Function push]
+```
+
+In the snippet above, the rest property of `array destructuring assignment` can be another `array or object binding pattern`. This allows you to simultaneously `unpack the properties and indices of arrays`.
+
+```javascript
+const name = "Javascript lovers";
+console.log([...name]); // ['J','a','v','a','s','c','r','i','p','t','','l','o','v','e','r','s';
+```
+
+In the snippet above, it will return and array with splited each characters.
+
+```javascript
+const myName = { firstName: "Javascript", lastName: "Lovers" };
+const bio = { ...myName };
+
+myName.firstName = "JS";
+
+console.log(myName); // { firstName: "JS", lastName: "Lovers" }
+
+console.log(bio); // { firstName: "Javascript", lastName: "Lovers" }
+```
+
+In the snippet above, myName’s update `did not reflect` in bio because we used the `spread operator on an object` that contains `primitive(old) values only`.
+
+Note: A developer would call `myName a shallow object` because it contains only `primitive(old) items`.
+
+`Here is one more example to understand rest operator with object reference:`
+
+```javascript
+const myName = {
+  fullName: { firstName: "Javascript", lastName: "Lovers" },
+};
+
+const bio = { ...myName };
+
+myName.fullName.firstName = "JS";
+
+console.log(myName); // { fullName: { firstName: "JS", lastName: "Lovers" } }
+
+console.log(bio); // { fullName: { firstName: "JS", lastName: "Lovers" } }
+```
+
+In the snippet above, myName’s update `is reflected` in bio because we used the spread operator on an object that contains a `non-primitive value.`
+
+### `Note:`
+
+- We call myName a `deep object` because it contains a non-primitive item.
+
+- You do `shallow copy` when you create references while cloning one object into another. For instance, `...myName` produces a shallow copy of the `myName` object because whatever alteration you make in one will reflect in the other.
+
+- You do `deep copy` when you clone objects without creating references. For instance, I could deep copy `myName` into `bio` by doing `const bio = JSON.parse(JSON.stringify(myName))`. By doing so, the computer will clone `myName` into `bio` without creating any reference.
