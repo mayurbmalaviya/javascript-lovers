@@ -12,6 +12,7 @@
 6. [Difference between `null` and `undefined`](#diff_null_and_undefined)
 7. [Difference between `REST` and `SPREAD` operators](#difference_rest_and_spread)
 8. [Difference between `setTimeout` and `setInterval`.](#difference_setTimeout_and_setInterval)
+9. [Difference between Pure and Impure function](#difference_pure_and_impure)
 
 ### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
@@ -349,4 +350,130 @@ And here is the picture for the `nested setTimeout:`
 `The nested setTimeout guarantees the fixed delay (here 100ms).`
 That’s because a `new call is planned at the end of the previous one`.
 
-`reference: click here`<a href="https://javascript.info/settimeout-setinterval#:~:text=setTimeout%20allows%20us%20to%20run,repeating%20continuously%20at%20that%20interval."></a>
+`reference: click here`(https://javascript.info/settimeout-setinterval#:~:text=setTimeout%20allows%20us%20to%20run,repeating%20continuously%20at%20that%20interval.)
+
+## Difference between `Pure` and `Impure` function<a name="difference_pure_and_impure"></a>
+
+---
+
+### Pure Function:
+
+- A Pure Function is a function (a block of code) that always `returns the same result if the same arguments are passed`. It does `not depend on any state or data change` during a program's execution. Rather, it only `depends on its input arguments`.
+
+- To be `considered pure`, functions must fulfil the following criteria:
+
+  - they must be `predictable`
+    - `Identical inputs` will always `return` `identical outputs`, no matter how many times a pure function is called. In other words: we can run a pure function as many times as we like, and given the inputs remain constant, the function will always predictably produce the same output.
+  - they must have `no side effects`
+
+    - A side-effect is any operation your function performs that is `not related to computing the final output, including` but `not limited to`:
+      - Modifying a global variable
+      - Modifying an argument
+      - Making HTTP requests
+      - DOM manipulation
+      - Reading/writing files
+    - A pure function must `both` be `predictable` and `without side-effects`. If either of these `criteria is not met, we're dealing with an impure function.`
+
+    - An `impure function` is kind of the `opposite` of a `pure one` - it doesn't predictably produce the same result given the same inputs when called multiple times, and may cause side-effects.
+
+### Examples of Pure and Impure function:
+
+```javascript
+// PURE FUNCTION  👼
+const pureAdd = (num1, num2) => {
+  return num1 + num2;
+};
+
+//always returns same result given same inputs
+pureAdd(5, 5); //10
+
+pureAdd(5, 5); //10
+
+//IMPURE FUNCTION 😈
+let plsMutateMe = 0;
+const impureAdd = (num) => {
+  return (plsMutateMe += num);
+};
+
+//returns different result given same inputs
+impureAdd(5); //5
+impureAdd(5); //10
+
+console.log(plsMutateMe);
+```
+
+In the `above example`, the `impure` version of the function both `changes a variable outside its scope`, and `results in different output`, despite being called with identical input. This `breaks both rules` of pure functions and as such, `it's pretty clear we're dealing with an impure function here.`
+
+`But` let's have a look at an example of an impure function that is `not so easy to tell apart from its pure counterpart.`
+
+```javascript
+//IMPURE FUNCTION 😈
+const impureAddToArray = (arr1, num) => {
+  arr1.push(num);
+  return arr1;
+};
+
+impureAddToArray([1, 2, 3], 4); //[1,2,3,4]
+impureAddToArray([1, 2, 3], 4); //[1,2,3,4]
+```
+
+`In above example`, given the same inputs, the function above will `always return the same output`. `But` it also `has the side effect of modifying memory` in-place by pushing a value into the original input array and is therefore `still considered impure`. `Adding a value to an array` via a `pure function` instead can be `achieved using the spread operator`, which `makes a copy of the original array without mutating it.`
+
+```JAVASCRIPT
+//IMPURE FUNCTION 😈
+const impureAddToArray = (arr1, num) => {
+  //altering arr1 in-place by pushing 🏋️
+  arr1.push(num);
+  return arr1;
+};
+
+// PURE FUNCTION 👼
+const pureAddToArray = (arr1, num) => {
+  return [...arr1, num];
+};
+```
+
+### Pure vs Impure JavaScript Methods
+
+`Certain JS functions from the standard library` are `inherently impure.`
+
+- Math.random()
+- Date.now()
+- arr.splice()
+- arr.push()
+- arr.sort()
+
+`Conversely, the below JS methods are typically associated` with `pure functions.`
+
+- arr.map()
+- arr.filter()
+- arr.reduce()
+- arr.each()
+- arr.every()
+- arr.concat()
+- arr.slice()
+- Math.floor()
+- str.toLowerCase()
+
+### Difference between Pure and Impure function
+
+| 👼 Pure Functions 👼                                                          | 😈 Impure Functions 😈                                                |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `no side-effects`                                                             | may have `side-effects`                                               |
+| returns `same result` if same args passed in no matter how many times it runs | may return `different result` if same args passed in on multiple runs |
+| `always returns` something                                                    | `may` take effect `without returning` anything                        |
+| is `easily testable`                                                          | `might be harder to test` due to side-effects                         |
+| is super useful in certain contexts                                           | is also super useful in certain contexts                              |
+
+### How should we use `javscript impure function` sort() as a `pure function`?
+
+```javascript
+let a = [3, 1, 2];
+a.sort();
+console.log(a); // [1,2,3]
+
+//similarly
+a = [3, 1, 2];
+[...a].sort(); // [1,2,3]
+console.log(a); // [3,1,2]
+```
