@@ -9,6 +9,7 @@
 3. [Associative array in JavaScript](#associative_array)
 4. [Why [] == [] returns false?](#array_comparison)
 5. [Explain about setTimeout with best example.](#setTimeout_explain)
+6. [Difference between `null` and `undefined`](#diff_null_and_undefined)
 
 ### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
@@ -138,3 +139,38 @@ console.log(`End of the task execution`);
 ### Explanation
 
 This code will iterate the loop for `infinite times` because for setTimeout it will `wait 0 seconds` to perform task execution. Meanwhile, call stack will `execute further loop` and it will `occupy the callstack` for infinite loop. Hence, it will `not execute setTimeout callback eventhough waiting is over` because callstack is occupied by while loop.
+
+## Difference between `null` and `undefined`.<a name="diff_null_and_undefined"></a>
+
+---
+
+### Definition
+
+`null` is an `assigned value`. It means nothing. `undefined` means a `variable has been declared` but `not defined yet`.
+
+### Example
+
+```javascript
+var testVar;
+alert(testVar); //shows undefined
+alert(typeof testVar); //shows undefined
+```
+
+`null` is an `assignment value`. It can be assigned to a variable as a representation of no value:
+
+```javascript
+var testVar = null;
+alert(testVar); //shows null
+alert(typeof testVar); //shows object
+```
+
+From the preceding examples, it is clear that `undefined` and `null` are `two distinct types`: `undefined` is a type itself `(undefined)` while `null` is an `object.`
+
+```javascript
+null == undefined; // true
+null === undefined; // false
+
+typeof null; // object
+
+typeof undefined; // undefined
+```
