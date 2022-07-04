@@ -11,6 +11,7 @@
 5. [Explain about setTimeout with best example.](#setTimeout_explain)
 6. [Difference between `null` and `undefined`](#diff_null_and_undefined)
 7. [Difference between `REST` and `SPREAD` operators](#difference_rest_and_spread)
+8. [Difference between `setTimeout` and `setInterval`.](#difference_setTimeout_and_setInterval)
 
 ### Why for..in method is not best solution to iterate array?<a name="forin_drawback"></a>
 
@@ -268,3 +269,84 @@ In the snippet above, myName’s update `is reflected` in bio because we used th
 - You do `shallow copy` when you create references while cloning one object into another. For instance, `...myName` produces a shallow copy of the `myName` object because whatever alteration you make in one will reflect in the other.
 
 - You do `deep copy` when you clone objects without creating references. For instance, I could deep copy `myName` into `bio` by doing `const bio = JSON.parse(JSON.stringify(myName))`. By doing so, the computer will clone `myName` into `bio` without creating any reference.
+
+## Difference between `setTimeout` and `setInterval`.<a name="difference_setTimeout_and_setInterval"></a>
+
+---
+
+### Definition
+
+We may decide to `execute a function not right now`, but at a `certain time` later. That’s called `“scheduling a call”`.
+
+There are `two methods` for it:
+
+- `setTimeout` allows us to run a function `once` `after the interval of time.`
+- `setInterval` allows us to run a function `repeatedly, starting after the interval of time`,` then repeating continuously at that interval.`
+
+### `setTimeout :`
+
+Syntax:
+To set timer:
+
+```javascript
+let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...);
+```
+
+To Canceling with clearTimeout
+A call to setTimeout `returns` a `timer identifier` `timerId` that we can use to `cancel the execution`.
+
+```javascript
+clearTimeout(timerId);
+```
+
+### `Example :`
+
+```javascript
+function sayHi(phrase, who) {
+  alert(phrase + ", " + who);
+}
+
+setTimeout(sayHi, 1000, "Hello", "Javascript Lovers"); // Hello, Javascript Lovers
+```
+
+### `setInterval :`
+
+The setInterval method has the `same syntax` as setTimeout:
+Syntax:
+
+```javascript
+let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
+```
+
+To stop further calls, we should call clearInterval.
+
+```javascript
+clearInterval(timerId);
+```
+
+`Note:` We can also use `nested setTimeout` to execute task at specific interval as `setInterval` execute.
+
+`Nested setTimeout` allows to set the delay between the executions `more precisely` than `setInterval`.
+
+`For setInterval the internal scheduler will run function after every 100ms:`
+
+![Set Interval](./resources/setinterval-interval.png)
+
+- The real delay between `func calls` for `setInterval` is `less than in the code!`
+
+- `That’s normal`, because the time taken by `func's execution “consumes” a part of the interval.`
+
+- It is possible that func's execution turns out to be `longer than we expected` and takes more than 100ms.
+
+- In this case the `engine waits for func to complete`, then checks the scheduler and if the time is up, `runs it again immediately`.
+
+- In the `edge case`, if the function `always executes longer than delay ms`, then the calls will `happen without a pause at all`.
+
+And here is the picture for the `nested setTimeout:`
+
+![Set Timeout](./resources/settimeout-interval.png)
+
+`The nested setTimeout guarantees the fixed delay (here 100ms).`
+That’s because a `new call is planned at the end of the previous one`.
+
+`reference: click here`<a href="https://javascript.info/settimeout-setinterval#:~:text=setTimeout%20allows%20us%20to%20run,repeating%20continuously%20at%20that%20interval."></a>
